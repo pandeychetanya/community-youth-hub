@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Youth Hub</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .content {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        #graph {
+            width: 100%;
+            height: 600px;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Community Youth Hub</h1>
+        <h2>Empowering Marginalized Voices Through the Community Youth Hub</h2>
+        
+        <h3>Introduction and Background</h3>
+        <p>
+            In the heart of our diverse nation lies an urgent need — the need to awaken the voices of those who have been silenced for too long. The Community Youth Hub (CYH) stands as a beacon of hope, dedicated to enhancing the knowledge and understanding of disinformation and yellow journalism among marginalized communities. From April to December 2019, the National Human Rights Commission of India (NHRCI) conducted a poignant study titled 'Locating National Human Rights Commission Within The Human Rights Landscape in India.' This study unveiled a stark reality — a significant gap in human rights awareness at the grassroots level, as outlined in our Indian Constitution.
+        </p>
+        
+        <h3>The Problem Statement</h3>
+        <p>
+            Marginalized communities often find themselves on the fringes of society, unaware of their fundamental rights. The NHRCI study shed light on this gap in awareness, a gap that hinders their ability to advocate for themselves and participate fully in democratic processes. This lack of knowledge is not just a statistic; it represents real lives, real struggles, and real stories of disenfranchisement.
+        </p>
+        
+        <h3>Objectives of the Community Youth Hub</h3>
+        <p>
+            The Community Youth Hub is more than an initiative; it is a movement with a mission to:
+            <ul>
+                <li>Ignite awareness in every corner of our communities</li>
+                <li>Build unwavering capacity to stand up and speak out</li>
+                <li>Empower content creators from marginalized communities to voice their rights and stories</li>
+            </ul>
+        </p>
+        
+        <h3>Structure and Functioning of the Hub</h3>
+        <p>
+            The Hub will serve as a virtual lifeline, connecting teams in Kolkata, West Bengal, and Arunachal Pradesh. This interconnected network will be the backbone of our efforts to produce and disseminate impactful content.
+        </p>
+        
+        <h3>Activities and Workshops</h3>
+        <p>
+            Our journey will include a series of transformative workshops aimed at enlightening community youth and adults about their democratic and legal rights. These will be supplemented with activity-based capacity-building sessions focusing on freedom of speech, combating disinformation, and harnessing digital media technologies.
+        </p>
+        
+        <h3>Content Creation and Dissemination</h3>
+        <p>
+            The Hub will be a hive of creativity, producing engaging visual content such as videos, reels, and managing web pages across key social media platforms including Facebook, Instagram, Twitter, and YouTube. Each piece of content will explore the nuances of freedom of speech and human rights, while also addressing the pervasive issues of misinformation and fake news.
+        </p>
+        
+        <h3>Expected Outcomes and Benefits</h3>
+        <p>
+            The Community Youth Hub promises to deliver profound benefits, including:
+            <ul>
+                <li>Marginalized youth expressing their views through self-managed media initiatives.</li>
+                <li>Comprehensive, hands-on training in filmmaking.</li>
+                <li>Skill development in mobile editing and social media management.</li>
+                <li>Workshops centered on content creation and storytelling.</li>
+                <li>Personality and leadership development training.</li>
+                <li>Identification and analysis of pressing issues facing communities.</li>
+                <li>Expanding knowledge and raising awareness through powerful online campaigns.</li>
+            </ul>
+        </p>
+        
+        <h3>Impact on Policy and Society</h3>
+        <p>
+            Through disciplined efforts and passionate advocacy, these young leaders will not only influence policy at the highest levels but will also bring development and recognition to communities that have long been overlooked. Their stories, their voices, and their courage will drive us towards a more equitable society.
+        </p>
+        
+        <h3>Interactive Graph</h3>
+        <div id="graph"></div>
+    </div>
+
+    <script>
+        // Define nodes and edges for the interactive graph
+        var nodes = [
+            { id: "Prayasam", label: "Central Hub for Initiatives", x: 0, y: 0 },
+            { id: "Grassroots Awareness", label: "Awareness Programs", x: -1, y: 1 },
+            { id: "Workshops", label: "Skills Workshops", x: 1, y: 1 },
+            { id: "Empowerment", label: "Empowered Individuals", x: 0, y: 2 },
+            { id: "Community Impact", label: "Community Improvements", x: -1, y: 3 },
+            { id: "Policy Influence", label: "Policy Advocacy", x: 1, y: 3 },
+            { id: "Social Change", label: "Broad Social Changes", x: 0, y: 4 }
+        ];
+
+        var edges = [
+            { from: "Prayasam", to: "Grassroots Awareness", label: "Initiates Programs" },
+            { from: "Prayasam", to: "Workshops", label: "Organizes Workshops" },
+            { from: "Grassroots Awareness", to: "Empowerment", label: "Leads to Empowerment" },
+            { from: "Workshops", to: "Empowerment", label: "Builds Skills" },
+            { from: "Empowerment", to: "Community Impact", label: "Drives Improvements" },
+            { from: "Empowerment", to: "Policy Influence", label: "Advocates Policy" },
+            { from: "Community Impact", to: "Social Change", label: "Creates Social Change" },
+            { from: "Policy Influence", to: "Social Change", label: "Shapes Policies" }
+        ];
+
+        var edge_trace = {
+            x: [],
+            y: [],
+            mode: 'lines',
+            line: {
+                width: 2,
+                color: 'gray'
+            },
+            text: edges.map(edge => edge.label),
+            hoverinfo: 'text'
+        };
+
+        edges.forEach(edge => {
+            var x0 = nodes.find(node => node.id === edge.from).x;
+            var y0 = nodes.find(node => node.id === edge.from).y;
+            var x1 = nodes.find(node => node.id === edge.to).x;
+            var y1 = nodes.find(node => node.id === edge.to).y;
+            edge_trace.x.push(x0, x1, null);
+            edge_trace.y.push(y0, y1, null);
+        });
+
+        var node_trace = {
+            x: nodes.map(node => node.x),
+            y: nodes.map(node => node.y),
+            text: nodes.map(node => node.label),
+            mode: 'markers+text',
+            textposition: 'top center',
+            marker: {
+                size: 20,
+                color: 'skyblue'
+            },
+            hoverinfo: 'text'
+        };
+
+        Plotly.newPlot('graph', [edge_trace, node_trace], {
+            title: 'Interactive Topological Graph for Prayasam',
+            showlegend: false,
+            xaxis: { visible: false },
+            yaxis: { visible: false }
+        });
+    </script>
+</body>
+</html>
